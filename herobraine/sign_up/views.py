@@ -11,17 +11,19 @@ def form(request):
         # send this user name and password to user server
         u = request.POST.get('username', None)
         p = request.POST.get('password', None)
+        print("username is:", u)
         add_user(u,p)
         return HttpResponseRedirect(reverse('sign_up:status', args=(u,)))
     else:
         form = UserForm
         return render(request, 'sign_up/form.html', {'form': form})
-        # return HttpResponseRedirect(reverse('sign_up:status', args=(u,)))
 
 def status(request, username): 
-    if request.method == 'POST':
-        get_status(u,p) 
-    return render(request, 'sign_up/status.html',{'username':username})
+    #if request.method == 'POST':
+    status = get_status(username)
+    #random = recv["queue_position"]
+    return render(request, 'sign_up/status.html',
+        {'username':username, 'queue_position':status["queue_position"]})
 
 def index(request):
     return render(request, 'sign_up/index.html')

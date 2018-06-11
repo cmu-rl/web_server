@@ -21,12 +21,17 @@ def add_user(username, password):
     print("Sent:     {}".format(data))
     print("Received: {}".format(received))
 
-def get_status(username, password):
+# get_status returns a dictionary (not completed)
+def get_status(username):
     data = {}
     data['cmd'] = 'get_status'
     data['uid'] = username
     sock.sendto(bytes(json.dumps(data), "utf-8"), (HOST, PORT))
     received = str(sock.recv(1024), "utf-8")
- 
     print("Sent:     {}".format(data))
     print("Received: {}".format(received))
+    status = json.loads(received) 
+    # an example response looks like this
+    # {"timestamp": "06_08_18_15_09", "banned": false, "awesome": true, 
+    #   "queue_position": 120, "message": "...", "error": false}
+    return status

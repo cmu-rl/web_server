@@ -1,8 +1,9 @@
 This is the status page of {{username}}
-<ul>you successfully signed up</ul>
-<ul>you are now ? on the queue</ul>
-<ul>or: you are a banned user</ul>
-<ul>you are off the queue, check your email for confirmation and key</ul>
+<ul>you successfully put yourself on the queue</ul>
+<ul>you are either on the queue {{queue_position}}or banned </ul>
+<ul> if on the queue and 0th, we want to display "check your email"</ul>
+<ul> here is the status information, we are working on parsing it </ul>
+<ul>{{update}}<ul>
+<!--
 get_status()
-response["banned"] = false
-response["queue_position"] = 120 
+response["banned"] = false --> 
