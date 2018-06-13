@@ -22,7 +22,7 @@ def add_user(username, password):
     print("Received: {}".format(received))
     return feedback
 
-# get_status returns a dictionary (not completed)
+# get_status returns a dictionary
 def get_status(username):
     data = {}
     data['cmd'] = 'get_status'
