@@ -17,9 +17,10 @@ def add_user(username, password):
 
     sock.sendto(bytes(json.dumps(data), "utf-8"), (HOST, PORT))
     received = str(sock.recv(1024), "utf-8")
-
+    feedback = json.loads(received)
     print("Sent:     {}".format(data))
     print("Received: {}".format(received))
+    return feedback
 
 # get_status returns a dictionary (not completed)
 def get_status(username):

@@ -7,20 +7,22 @@ from .server import add_user, get_status
 
 def form(request):
     if request.method == 'POST':
-        # send this user name and password to user server
+        # send username and email to user server
         u = request.POST.get('username', None)
         p = request.POST.get('email', None)
-        #print("username is:", u)
-        add_user(u,p)
-        return HttpResponseRedirect(reverse('sign_up:status', args=(u,)))
+        feedback = add_user(u,p)
+        if feedback["status"] == "valid":
+            return HttpResponseRedirect(reverse('sign_up:status', args=(u,)))
+        else:
+            return render(request, 'sign_up/form.html', {'validInput': False})
     else:
         #form = UserForm
         #return render(request, 'sign_up/form.html', {'form': form})
-        return render(request, 'sign_up/form.html')
+        return render(request, 'sign_up/form.html', {'validInput': True})
 
 def status(request, username): 
     status = get_status(username)
-    if status["banned"]:
+    if status["banned"]: # double check: is this a boolean?
         return render(request, 'sign_up/banned.html')
     else:  
         return render(request, 'sign_up/status.html',
