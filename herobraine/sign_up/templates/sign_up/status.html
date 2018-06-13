@@ -1,9 +1,10 @@
 This is the status page of {{username}}
 <ul>you successfully put yourself on the queue</ul>
-<ul>you are either on the queue {{queue_position}}or banned </ul>
-<ul> if on the queue and 0th, we want to display "check your email"</ul>
-<ul> here is the status information, we are working on parsing it </ul>
-<ul>{{update}}<ul>
+{% if queue_position != 0 %}
+<ul>you are {{queue_position}} on the queue</ul>
+{% else %}
+<ul> You are off the queue! Check your email for the key. Happy Minecrafting!</ul>
+{% endif %}
 <!--
 get_status()
 response["banned"] = false --> 
