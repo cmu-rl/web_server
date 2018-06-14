@@ -3,8 +3,8 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 #from .forms import UserForm
-from ..server import add_user, get_status, add_to_queue
-
+from herobraine.user_server import add_user, get_status, add_to_queue
+#from herobraine import .user_server
 def form(request):
     if request.method == 'POST':
         # send username and email to user server
