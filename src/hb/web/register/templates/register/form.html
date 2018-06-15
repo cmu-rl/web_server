@@ -1,0 +1,14 @@
+Form to sign up
+Optional info to display: username taken, username not found, password restriction 
+<form  method="post">
+{% csrf_token %}
+     Minecraft ID: <br>
+     <input type="text" name="username"><br>
+     Email: <br>
+     <input type="text" name="email"><br>
+     Password:<br>
+     <input type="text" name="password"><br>
+     Re-enter your passowrd: <br>
+     <input type="text" name="re-pwd"><br>
+     <input type="submit" value="Submit"><br>
+</form>
