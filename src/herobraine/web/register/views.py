@@ -4,7 +4,7 @@ from django.urls import reverse
 from .user_server_helper import add_user
 
 def index(request):
-    return HttpResponse("this is the sign up page for new user")
+    return render(request, "register/index.html")
 
 def form(request):
     if request.method == 'POST':

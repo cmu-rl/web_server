@@ -1,22 +1,31 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
-from django.template import loader
 from django.urls import reverse
+from django.contrib.auth import authenticate, login
 from .user_server_helper import get_status, add_to_queue
+from .forms import QueueForm
 
 def form(request):
+    isValidInput = True
+    
     if request.method == 'POST':
-        # Add user to queue
-        u = request.POST.get('username', None)
-        p = request.POST.get('email', None)
-        # add try except here later
-        feedback = add_to_queue(u,p) 
-        if not feedback["error"]: # valid input
-            return HttpResponseRedirect(reverse('queue:status', args=(u,)))
-        else: # invalid input
-            return render(request, 'queue/form.html', {'validInput': False})
+        form = QueueForm(request.POST)
+        if form.is_valid():
+            # Add user to queue, add try except here later
+            u = request.POST.get('username', None)
+            e = request.POST.get('email', None)
+            p = request.POST.get('password', None)
+            print("user input:", u, e, p)
+            feedback = add_to_queue(u,e) 
+            if feedback["error"]: isValidInput = False
+            else: # redirect to status page 
+                return HttpResponseRedirect(reverse('queue:status', args=(u,)))
+        else: isValidInput = False
     else:
-        return render(request, 'queue/form.html', {'validInput': True})
+        form = QueueForm() 
+    
+    return render(request, 'queue/form.html', 
+                      {'validInput': isValidInput, 'form':form})
 
 def status(request, username): 
     try:
