@@ -1,7 +1,25 @@
-Form to sign up
-Optional info to display: username taken, username not found, password restriction 
-<form  method="post">
-{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> queue form </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- import CDN, from W3SCHOOL, different from getbootstrp -->
+  <link rel="stylesheet" 
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- end of CDN -->
+  {% load static %}
+  <!-- potentially buggy: still use css in queue app -->
+  <link href="{% static 'queue/signin.css' %}" rel="stylesheet">
+</head>
+
+<body>
+  <!--Optional info to display: username taken, username not found, password restriction-->
+  <div class="container">
+    <form class="form-signin" method="post">
+    <h1 class="h3 mb-3 font-weight-normal"> Form to sign up</h1>
+     {% csrf_token %}
      Minecraft ID: <br>
      <input type="text" name="username"><br>
      Email: <br>
@@ -11,4 +29,8 @@ Optional info to display: username taken, username not found, password restricti
      Re-enter your passowrd: <br>
      <input type="text" name="re-pwd"><br>
      <input type="submit" value="Submit"><br>
-</form>
+    </form>
+  </div>
+
+</body>
+</html>

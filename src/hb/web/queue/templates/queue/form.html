@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <title> queue form </title>
@@ -10,16 +10,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- end of CDN -->
   {% load static %}
-  <!-- <link href="{% static 'queue/signin.css' %}" rel="stylesheet">-->
-  <link rel="stylesheet" type="text/css" href="{% static 'queue/style.css'%}"/>
+  <link href="{% static 'queue/signin.css' %}" rel="stylesheet">
 </head>
 
 <body class="text-center">
-  <div><p> this should be green </p></div>
   <div class="container">
     <form class="form-signin" method="post">
     {% csrf_token %}
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Welcome to herobraine!</h1>
       <p>
         {% if validInput %}
         Ready to play?
@@ -27,10 +25,11 @@
         Your input is invalid! please try again!
         {% endif %}
       </p>
-      <label for="id_username"i class="sr-only">username:</label>
-      <input type="text" name="username" maxlength="20" required id="id_username"
-      class="form-control" placeholder="username" required autofocus/>
-      
+      <div class="form-group">
+          <label for="id_username">username:</label>
+          {{ form.username }}
+      </div>
+
       <div class="form-group">
           <label for="id_email">email:</label>
           {{ form.email }}

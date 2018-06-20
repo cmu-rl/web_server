@@ -11,11 +11,11 @@ def form(request):
     if request.method == 'POST':
         form = QueueForm(request.POST)
         if form.is_valid():
-            # Add user to queue, add try except here later
+            # get user input
             u = request.POST.get('username', None)
             e = request.POST.get('email', None)
             p = request.POST.get('password', None)
-            print("user input:", u, e, p)
+            # add this user to queue
             feedback = add_to_queue(u,e) 
             if feedback["error"]: isValidInput = False
             else: # redirect to status page 
@@ -26,11 +26,13 @@ def form(request):
     return render(request, 'queue/form.html', 
                       {'validInput': isValidInput, 'form':form})
 
+# garuntee to have a valide status?
 def status(request, username): 
     try:
         status = get_status(username)
     except TimeOut:
         return HttpResponse("server timeout")
+    print(status)
     if status["banned"]: # double check: is this a boolean?
         return render(request, 'queue/banned.html')
     else:
