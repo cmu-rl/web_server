@@ -2,10 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login
-#import herobraine
-#import herobraine.user_server
 from hb.user_server import get_status, add_to_queue 
-#from .user_server_helper import get_status, add_to_queue
 from .forms import QueueForm
 
 def form(request):
@@ -26,7 +23,6 @@ def form(request):
         else: isValidInput = False
     else:
         form = QueueForm() 
-    
     return render(request, 'queue/form.html', 
                       {'validInput': isValidInput, 'form':form})
 

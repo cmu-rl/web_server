@@ -1,11 +1,34 @@
-{% if validInput %}
-Ready to play?
-{% else %}
-Your input is invalid! please try again!
-{% endif %}
-<form  method="post">
-{% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit"><br>
-</form>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>trying to create queue form </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- import CDN, from W3SCHOOL, different from getbootstrp -->
+  <link rel="stylesheet" 
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- end of CDN -->
+</head>
 
+<body>
+
+  <div class="container">
+    {% if validInput %}
+    Ready to play?
+    {% else %}
+    Your input is invalid! please try again!
+    {% endif %}
+  </div>
+  <div class="container">
+  <form  method="post">
+  {% csrf_token %}
+      <div class="form-group">
+        {{ form }}
+      </div>
+      <button type="submit" class="btn btn-default">submit</button>
+      <!-- <input type="submit" value="Submit"><br> -->
+  </form>
+  </div>
+</body>
+</html>
