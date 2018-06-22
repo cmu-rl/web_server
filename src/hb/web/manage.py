@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 import sys
-
+sys.append("/home/ubuntu/web_server/src/")
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "herobraine.settings")
     try:
