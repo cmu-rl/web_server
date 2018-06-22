@@ -8,3 +8,11 @@ class SignupForm(forms.Form):
                                 widget=forms.PasswordInput)
     repwd = forms.CharField(min_length=6, label="repwd",
                                 widget=forms.PasswordInput)
+
+    def clean(self):
+    	cleaned_data = super(SignupForm, self).clean()
+    	password = self.cleaned_data.get('password')
+    	repwd = self.cleaned_data.get('repwd')
+
+    	if password and repwd and password != repwd:
+        	raise forms.ValidationError("passwords do not match")
