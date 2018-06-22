@@ -33,6 +33,7 @@ def status(request, username):
     except TimeOut:
         return HttpResponse("server timeout")
     print(status)
+    if status["error"]: return HttpResponse("sorry you haven't sign up yet")
     if status["banned"]: # double check: is this a boolean?
         return render(request, 'queue/banned.html')
     else:

@@ -19,16 +19,31 @@
   <div class="container">
     <form class="form-signin" method="post">
     <h1 class="h3 mb-3 font-weight-normal"> Form to sign up</h1>
+    <p>
+    {% if not validInput %}
+    Your input is not valid, please try again
+    {% endif%}
+    </p>
      {% csrf_token %}
-     Minecraft ID: <br>
-     <input type="text" name="username"><br>
-     Email: <br>
-     <input type="text" name="email"><br>
-     Password:<br>
-     <input type="text" name="password"><br>
-     Re-enter your passowrd: <br>
-     <input type="text" name="re-pwd"><br>
-     <input type="submit" value="Submit"><br>
+     <div class="form-group">
+          <label for="id_username">minecraft username:</label>
+          {{ form.username }}
+      </div>
+
+      <div class="form-group">
+          <label for="id_email">email:</label>
+          {{ form.email }}
+      </div>
+      <div class="form-group">
+          <label for="id_password">password:</label>
+          {{ form.password }}
+      </div>
+      <div class="form-group">
+          <label for="id_repwd">retype password:</label>
+          {{ form.repwd }}
+      </div>
+      <button type="submit" class="btn btn-default">submit</button>
+    
     </form>
   </div>
 

@@ -30,6 +30,7 @@ def generateUserID(minecraftUUID):
 def give_error_feedback():
    feedback = {}
    feedback['error'] = True
+   print("not valid minecraft name!!!! T^T")
    return feedback
 
 def verified_mc_user(username):
@@ -62,9 +63,11 @@ def add_user(username, email):
     if not verified_mc_user(username):
         return give_error_feedback()
     # if valid, send to user server
+    uid = generateUserID(getUUID(username))
     data = {}
     data['cmd'] = 'add_user'
-    data['mcusername'] = generateUserID(username) # temporal and buggy
+    data['mcusername'] = username
+    data['uid'] = uid
     data['email'] = email
 
     sock.sendto(bytes(json.dumps(data), "utf-8"), (HOST, PORT))
@@ -80,9 +83,10 @@ def get_status(username):
     if not verified_mc_user(username):
         return give_error_feedback()
     # if valid, send to user server
+    uid = generateUserID(getUUID(username))
     data = {}
     data['cmd'] = 'get_status'
-    data['uid'] = generateUserID(username) # temporal and buggy
+    data['uid'] = uid
     sock.sendto(bytes(json.dumps(data), "utf-8"), (HOST, PORT))
     received = str(sock.recv(1024), "utf-8")
     print("Sent:     {}".format(data))

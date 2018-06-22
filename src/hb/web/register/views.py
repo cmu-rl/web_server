@@ -17,12 +17,17 @@ def form(request):
             e = request.POST.get('email', None)
             p = request.POST.get('password', None)
             r = request.POST.get('repwd', None)
+            print("try to add new user: ", u)
             # add new user
             feedback = add_user(u, e)
-            if feedback["error"]: isValidInput = False # and stay on the page
+            if feedback["error"]: 
+                isValidInput = False # and stay on the page
+                print("failed to add user ", u)
             else: # sucess and redirect
                 return HttpResponseRedirect(reverse('queue:status', args=(u,)))
         else:
+            print("django thinks it is bad")
+            print("reason:", form.errors)
             isValidInput = False
     else:
         form = SignupForm()
