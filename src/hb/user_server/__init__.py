@@ -6,7 +6,7 @@ import socket
 import hashlib
 import urllib.request
 
-HOST, PORT = "18.206.147.166", 9999
+HOST, PORT = "52.91.188.21", 9999
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.settimeout(2)
 
