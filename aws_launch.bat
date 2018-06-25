@@ -11,6 +11,9 @@ REM install django here
 apt install virtualenv
 python3.6 -m pip install django
 ssh-keyscan github.com >> /home/ubuntu/.ssh/known_hosts
+REM upgrade certifi here to fix mojang api ssl certificate error
+pip install --upgrade certifi
+
 
 cd /home/ubuntu
 git clone https://github.com/cmu-rl/web_server.git
