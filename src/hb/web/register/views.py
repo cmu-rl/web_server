@@ -4,32 +4,52 @@ from django.urls import reverse
 from hb.user_server import add_user
 from .forms import SignupForm
 
+####### helper function ####### 
+# assume form.is_valid is false
+def getErrMsg(form):
+    # update msg here, assume only one error
+    error = form.errors.as_data()
+    for k,v in error.items():
+        msg = str(v[0])[2:-2] # hardcoded formatting
+    return msg
+
+def getUserInput(request):
+    u = request.POST.get('username', None)
+    e = request.POST.get('email', None)
+    p = request.POST.get('password', None)
+    r = request.POST.get('repwd', None)
+    return (u,e,p,r)
+
+####### views ####### 
 def index(request):
     return render(request, "register/index.html")
 
+
 def form(request):
-    isValidInput = True
+    # initialization
+    valid = True
+    msg = ""
+
     if request.method == 'POST':
+        print("hello!")
         form = SignupForm(request.POST)
         if form.is_valid():
-            # get user input
-            u = request.POST.get('username', None)
-            e = request.POST.get('email', None)
-            p = request.POST.get('password', None)
-            r = request.POST.get('repwd', None)
-            print("try to add new user: ", u)
             # add new user
-            feedback = add_user(u, e)
-            if feedback["error"]: 
-                isValidInput = False # and stay on the page
-                print("failed to add user ", u)
-            else: # sucess and redirect
-                return HttpResponseRedirect(reverse('queue:status', args=(u,)))
+            (u,e,p,r) = getUserInput(request)
+            feedback = add_user(u, e, p)
+
+            if not feedback['error']: # sucess and redirect
+                return HttpResponseRedirect(reverse('queue:status', 
+                                                     args=(u,)))
+            else:  # stay on the page
+                valid = False
+                msg = feedback['message']
+
         else:
-            print("django thinks it is bad")
-            print("reason:", form.errors)
-            isValidInput = False
+            valid = False
+            msg = getErrMsg(form)
+            
     else:
         form = SignupForm()
     return render(request, "register/form.html",
-        {'validInput': isValidInput, 'form':form})
+        {'valid': valid, 'msg':msg, 'form':form})

@@ -6,7 +6,7 @@ import socket
 import hashlib
 import urllib.request
 
-HOST, PORT = "18.206.147.166", 9999
+HOST, PORT = "52.91.188.21", 9999
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.settimeout(2)
 
@@ -16,8 +16,8 @@ def getUUID(username):
     contents = urllib.request.urlopen(request).read()
     str_cont = str(contents, "utf-8")
     d =  json.loads(str_cont)
-    # yet to handle invalid minecraft username
-    if d["id"] == "": raise Exception("minecraft username does not exist")
+    if d["id"] == "":
+        raise Exception("minecraft username does not exist")
     return d["id"]
 
 def generateUserID(minecraftUUID):
@@ -30,17 +30,18 @@ def generateUserID(minecraftUUID):
 def give_error_feedback():
    feedback = {}
    feedback['error'] = True
-   print("not valid minecraft name!!!! T^T")
+   feedback['message'] = "not valid minecraft name!!!! T^T"
    return feedback
 
 def verified_mc_user(username):
     try:
-        uid = generateUserID(getUUID(username))
+        uuid = getUUID(username)
+        uid = generateUserID(uuid)
     except:
         return False
     return True
 
-def add_to_queue(username, email):
+def add_to_queue(username, email, password):
     # first vefiry username is valid
     if not verified_mc_user(username):
         return give_error_feedback()
@@ -50,6 +51,7 @@ def add_to_queue(username, email):
     data['cmd'] = 'add_to_queue'
     data['uid'] = uid
     data['email'] = email
+    data['password'] = password
     sock.sendto(bytes(json.dumps(data), "utf-8"), (HOST, PORT))
     received = str(sock.recv(1024), "utf-8")
     feedback = json.loads(received)
@@ -58,17 +60,19 @@ def add_to_queue(username, email):
     return feedback 
 
 # add_user, register a new user, return a dictionary
-def add_user(username, email):
+def add_user(username, email, password):
     # first vefiry username is valid
     if not verified_mc_user(username):
         return give_error_feedback()
     # if valid, send to user server
+    print("valid minecraft username!")
     uid = generateUserID(getUUID(username))
     data = {}
     data['cmd'] = 'add_user'
     data['mcusername'] = username
     data['uid'] = uid
     data['email'] = email
+    data['password'] = password
 
     sock.sendto(bytes(json.dumps(data), "utf-8"), (HOST, PORT))
     received = str(sock.recv(1024), "utf-8")
@@ -78,6 +82,7 @@ def add_user(username, email):
     return feedback
 
 # get_status returns a dictionary
+# how to authenticate? nothing to prevent user from directly put the url?
 def get_status(username):
     # first vefiry username is valid
     if not verified_mc_user(username):

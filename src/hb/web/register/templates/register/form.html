@@ -20,8 +20,8 @@
     <form class="form-signin" method="post">
     <h1 class="h3 mb-3 font-weight-normal"> Form to sign up</h1>
     <p>
-    {% if not validInput %}
-    Your input is not valid, please try again
+    {% if not valid %}
+    Your input is not valid. {{msg}}
     {% endif%}
     </p>
      {% csrf_token %}

@@ -15,4 +15,4 @@ class SignupForm(forms.Form):
     	repwd = self.cleaned_data.get('repwd')
 
     	if password and repwd and password != repwd:
-        	raise forms.ValidationError("passwords do not match")
+        	raise forms.ValidationError("Passwords do not match")
