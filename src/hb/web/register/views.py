@@ -31,7 +31,6 @@ def form(request):
     msg = ""
 
     if request.method == 'POST':
-        print("hello!")
         form = SignupForm(request.POST)
         if form.is_valid():
             # add new user

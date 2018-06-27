@@ -6,7 +6,7 @@ import socket
 import hashlib
 import urllib.request
 
-HOST, PORT = "52.91.188.21", 9999
+HOST, PORT = "184.73.82.23", 9999
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.settimeout(2)
 
@@ -55,8 +55,8 @@ def add_to_queue(username, email, password):
     sock.sendto(bytes(json.dumps(data), "utf-8"), (HOST, PORT))
     received = str(sock.recv(1024), "utf-8")
     feedback = json.loads(received)
-    print("Sent:     {}".format(data))
-    print("Received: {}".format(received))
+    #print("Sent:     {}".format(data))
+    #print("Received: {}".format(received))
     return feedback 
 
 # add_user, register a new user, return a dictionary
@@ -65,7 +65,6 @@ def add_user(username, email, password):
     if not verified_mc_user(username):
         return give_error_feedback()
     # if valid, send to user server
-    print("valid minecraft username!")
     uid = generateUserID(getUUID(username))
     data = {}
     data['cmd'] = 'add_user'
@@ -94,7 +93,7 @@ def get_status(username):
     data['uid'] = uid
     sock.sendto(bytes(json.dumps(data), "utf-8"), (HOST, PORT))
     received = str(sock.recv(1024), "utf-8")
-    print("Sent:     {}".format(data))
-    print("Received: {}".format(received))
+    #print("Sent:     {}".format(data))
+    #print("Received: {}".format(received))
     status = json.loads(received) 
     return status
