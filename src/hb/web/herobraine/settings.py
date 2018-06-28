@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'queue.apps.QueueConfig',
+    'login.apps.LoginConfig',
     'home.apps.HomeConfig',
     'register.apps.RegisterConfig',
     'django.contrib.admin',

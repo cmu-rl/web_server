@@ -38,7 +38,7 @@ def form(request):
             feedback = add_user(u, e, p)
 
             if not feedback['error']: # sucess and redirect
-                return HttpResponseRedirect(reverse('queue:status', 
+                return HttpResponseRedirect(reverse('login:status', 
                                                      args=(u,)))
             else:  # stay on the page
                 valid = False

@@ -5,6 +5,8 @@ import time
 import socket
 import hashlib
 import urllib.request
+from mojang_api.servers.authserver import authenticate_user
+
 
 HOST, PORT = "184.73.82.23", 9999
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -33,17 +35,24 @@ def give_error_feedback():
    feedback['message'] = "not valid minecraft name!!!! T^T"
    return feedback
 
-def verified_mc_user(username):
+def verified_mc_user(username, email, password):
     try:
         uuid = getUUID(username)
         uid = generateUserID(uuid)
     except:
         return False
-    return True
+    # return True
+    # wired logic, be careful
+    response = authenticate_user(email,password,request_user=True)
+    try:
+        error = response['error'] # if succeed, no such field
+    except:
+        return True
+    return False
 
 def add_to_queue(username, email, password):
     # first vefiry username is valid
-    if not verified_mc_user(username):
+    if not verified_mc_user(username, email, password):
         return give_error_feedback()
     # if valid, send to user server
     uid = generateUserID(getUUID(username))
@@ -62,7 +71,7 @@ def add_to_queue(username, email, password):
 # add_user, register a new user, return a dictionary
 def add_user(username, email, password):
     # first vefiry username is valid
-    if not verified_mc_user(username):
+    if not verified_mc_user(username, email, password):
         return give_error_feedback()
     # if valid, send to user server
     uid = generateUserID(getUUID(username))
@@ -84,8 +93,8 @@ def add_user(username, email, password):
 # how to authenticate? nothing to prevent user from directly put the url?
 def get_status(username):
     # first vefiry username is valid
-    if not verified_mc_user(username):
-        return give_error_feedback()
+    # if not verified_mc_user(username):
+        #return give_error_feedback()
     # if valid, send to user server
     uid = generateUserID(getUUID(username))
     data = {}

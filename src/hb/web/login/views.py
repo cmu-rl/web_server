@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login
 from hb.user_server import get_status, add_to_queue 
-from .forms import QueueForm
+from .forms import LoginForm
 
 ####### helper function ####### 
 # assume form.is_valid is false
@@ -25,7 +25,7 @@ def form(request):
     isValidInput = True
     msg = "" # for email format and incorrect password
     if request.method == 'POST':
-        form = QueueForm(request.POST)
+        form = LoginForm(request.POST)
         if form.is_valid():
             # get user input
             (u,e,p) = getUserInputFromSignin(request)
@@ -34,13 +34,13 @@ def form(request):
                 isValidInput = False
                 msg = feedback['message']
             else: # success and redirect to status page 
-                return HttpResponseRedirect(reverse('queue:status', args=(u,)))
+                return HttpResponseRedirect(reverse('login:status', args=(u,)))
         else: 
             isValidInput = False
             msg = getErrMsg(form)
     else:
-        form = QueueForm() 
-    return render(request, 'queue/form.html', 
+        form = LoginForm() 
+    return render(request, 'login/form.html', 
                       {'validInput': isValidInput, 'msg':msg, 'form':form})
 
 # garuntee to have a valide status?
@@ -55,12 +55,12 @@ def status(request, username):
     # this error should prevent user from directly entering the url
     if status["error"]: return HttpResponse("sorry you haven't sign up yet")
     if status["banned"]: # double check: is this a boolean?
-        return render(request, 'queue/banned.html')
+        return render(request, 'login/banned.html')
     else:
-        return render(request, 'queue/status.html',
+        return render(request, 'login/status.html',
             {'username':username, 
              'queue_position':status["queue_position"],
              'off_queue':status["off_queue"]})
 
 def index(request):
-    return render(request, 'queue/index.html')
+    return render(request, 'login/index.html')
