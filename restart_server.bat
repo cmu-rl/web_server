@@ -1,4 +1,4 @@
-udo service user_server stop
+sudo service web_server stop
 cd ~/web_server/
 git pull
 sudo systemctl daemon-reload
