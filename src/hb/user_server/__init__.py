@@ -8,7 +8,7 @@ import urllib.request
 from mojang_api.servers.authserver import authenticate_user
 
 
-HOST, PORT = "184.73.82.23", 9999
+HOST, PORT = "user.herobraine.stream", 9999
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.settimeout(2)
 
