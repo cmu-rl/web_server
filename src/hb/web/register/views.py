@@ -35,8 +35,12 @@ def form(request):
         if form.is_valid():
             # add new user
             (u,e,p,r) = getUserInput(request)
-            feedback = add_user(u, e, p)
-
+            try:
+                feedback = add_user(u, e, p)
+            except:
+                e = sys.exc_info()[0]
+                print(e)
+                return HttpResponse("Error:%s" % e)
             if not feedback['error']: # sucess and redirect
                 return HttpResponseRedirect(reverse('login:status', 
                                                      args=(u,)))
