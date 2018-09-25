@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> Herobraine Consent Form </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- import CDN, from W3SCHOOL, different from getbootstrp -->
+  <link rel="stylesheet" 
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- end of CDN -->
+  {% load static %}
+  <!-- potentially buggy: still use css in queue app -->
+  <link href="{% static 'consent/index.css' %}" rel="stylesheet">
+</head>
+
+<body>
+  <div class="consent-holder">
+    <p style="text-align: center; tab-stops: -.5in; border: none; padding: 0in;"><strong><span style="font-size: 18.0pt; letter-spacing: -.15pt;">Online Consent Form</span></strong></p>
+
+    <p>&nbsp;</p>
+
+    <p style="tab-stops: -.5in;"><span style="letter-spacing: -.15pt;">This server is part of a research study conducted by Carnegie Mellon University.</span></p>
+
+    <p style="tab-stops: -.5in;"><span style="letter-spacing: -.15pt;">We have developed a framework to record players in the massively multiplayer online video game Minecraft. We capture the packets sent from the Minecraft server enabling us to determine statistics, recreate observations, and record actions. This will allow us to create more sample efficient reinforcement learning algorithms and better understand human priors in relation to learning in simulated multi modal open world environments. This document informs you of your rights regarding voluntarily participation in this research server. Please read carefully before agreeing to the terms presented here.</span></p>
+
+    <p style="tab-stops: -.5in;"><strong><span style="letter-spacing: -.15pt;">Purpose</span></strong></p>
+
+    <p style="tab-stops: -.5in;"><span style="letter-spacing: -.15pt;">The purpose of the research is to advance the foundation of AI understanding. Through recording your avatar&rsquo;s actions and interactions we hope to build a model of human learning and leverage human priors to advance the exploration and learning of advanced AI agents.</span></p>
+
+    <p style="tab-stops: -.5in;"><span style="color: #0070c0; letter-spacing: -.15pt;"></span></p>
+
+    <p style="tab-stops: -.5in;"><strong><span style="letter-spacing: -.15pt;">Procedures</span></strong><span style="letter-spacing: -.15pt;">&nbsp; </span></p>
+
+    <p style="tab-stops: -.5in;"><span style="letter-spacing: -.15pt;">This study is observational. No actions or efforts are required on your behalf. We only ask that you play in a civil manner and adhere to our server guidelines.</span> <span style="letter-spacing: -.15pt;">We record your actions only while connected to our Minecraft server. We then compute summary statistics and encode actions into an anonymized format consumable by machine learning algorithms. These actions are recorded by capturing the packet interactions with the Minecraft server.</span></p>
+
+    <p style="tab-stops: -.5in;"><strong><span style="letter-spacing: -.15pt;">Participant Requirements</span></strong><span style="letter-spacing: -.15pt;">&nbsp; </span></p>
+
+    <p style="tab-stops: -.5in;"><span style="letter-spacing: -.15pt;">Participation in this study is limited to individuals age 18 and older. Participants must possess their own license of Minecraft and may only access the server using their own account credentials.</span></p>
+
+    <p style="tab-stops: -.5in;"><strong><span style="letter-spacing: -.15pt;">Risks</span></strong></p>
+
+    <p style="tab-stops: -.5in;"><span style="letter-spacing: -.15pt;">The risks and discomfort associated with participation in this study are no greater than those ordinarily encountered in daily life or during other online activities.&nbsp; </span></p>
+
+    <p style="tab-stops: -.5in;"><strong><span style="letter-spacing: -.15pt;">Benefits</span></strong></p>
+
+    <p style="tab-stops: -.5in;"><span style="letter-spacing: -.15pt;">There may be no personal benefit from your participation in the study, but the knowledge received may be of value to humanity<span style="color: #0070c0;">.&nbsp; </span></span></p>
+
+    <p style="tab-stops: -.5in;"><strong><span style="letter-spacing: -.15pt;">Compensation &amp; Costs</span></strong></p>
+
+    <p style="tab-stops: -.5in;"><span style="letter-spacing: -.15pt;">There is no compensation for participation in this study.</span></p>
+
+    <p style="tab-stops: -.5in;"><span style="letter-spacing: -.15pt;">There will be no cost to you if you participate in this study. </span></p>
+
+    <p style="margin-right: .15in; tab-stops: -.5in;"><strong><span style="letter-spacing: -.15pt;">Future Use of Information</span></strong></p>
+
+    <p style="margin-right: .15in; tab-stops: -.5in;"><span style="letter-spacing: -.15pt;">In the future, once we have removed all identifiable information from your data, we may use the data for our future research studies, or we may distribute the data to other researchers for their research studies.&nbsp; We would do this without getting additional informed consent from you (or your legally authorized representative).&nbsp; </span>Sharing of data with other researchers will only be done in such a manner that you will not be identified.</p>
+
+    <p style="tab-stops: -.5in;"><strong><span style="letter-spacing: -.15pt;">Confidentiality</span></strong></p>
+
+    <p style="tab-stops: -.5in;"><span style="letter-spacing: -.15pt;">The data captured for the research does not include any personally identifiable information about you. </span>By participating in this research, you understand and agree that Carnegie Mellon may be required to disclose your consent form, data and other personally identifiable information as required by law, regulation, subpoena or court order.&nbsp; Otherwise, your confidentiality will be maintained in the following manner:</p>
+
+    <p style="margin-right: -10.0pt; text-autospace: none;">Your data and consent form will be kept separate. Your consent form will be stored in a secure location on Carnegie Mellon property and will not be disclosed to third parties. By participating, you understand and agree that the data and information gathered during this study may be used by Carnegie Mellon and published and/or disclosed by Carnegie Mellon to others outside of Carnegie Mellon.&nbsp; However, your name, contact information and other direct personal identifiers will not be mentioned in any such publication or dissemination of the research data and/or results by Carnegie Mellon. Note that per regulation all research data must be kept for a minimum of 3 years.</p>
+
+    <p style="margin-right: -10.0pt; text-autospace: none;">Your data may be reviewed and labeled by annotators, either professional or crowd-sourced. Annotators will receive only anonymized player data and annotation will be assigned at random as to preserve the anonymity of players.</p>
+
+    <p style="text-align: justify; text-justify: inter-ideograph; page-break-after: avoid;"><strong>Right to Ask Questions &amp; Contact Information</strong></p>
+
+    <p>If you have any questions about this study, you should feel free to ask them by contacting the Principal Investigator, Will Guss now at <a href="mailto:whg@andrew.cmu.edu">whg@andrew.cmu.edu</a>, 5000 Forbes Ave, Pittsburgh, PA 15232.<span style="color: #0070c0;">&nbsp; </span>If you have questions later, desire additional information, or wish to withdraw from future participation please contact the Principal Investigator by mail, phone or e-mail in accordance with the contact information listed above.&nbsp;</p>
+
+    <p>If you have questions pertaining to your rights as a research participant; or to report concerns to this study, you should contact the Office of Research integrity and Compliance at Carnegie Mellon University.&nbsp; Email: <a href="mailto:irb-review@andrew.cmu.edu">irb-review@andrew.cmu.edu</a> . Phone: 412-268-1901 or 412-268-5460.</p>
+
+    <p><strong>Voluntary Participation</strong></p>
+
+    <p>Your participation in this research is voluntary.&nbsp; You may discontinue participation at any time during the research activity.&nbsp; You may print a copy of this consent form for your records.</p>
+  </div>
+  <div class="button-holder">
+    <a href="/signup/form"><button type="button">Accept</button></a>
+    <a href="/"><button type="button">Decline</button></a>
+  </div>
+</body>
+</html>
