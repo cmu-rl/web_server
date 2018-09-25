@@ -3,6 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from hb.user_server import add_user
 from .forms import SignupForm
+import sys
 
 ####### helper function ####### 
 # assume form.is_valid is false
