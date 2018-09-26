@@ -16,9 +16,7 @@ def getErrMsg(form):
 def getUserInput(request):
     u = request.POST.get('username', None)
     e = request.POST.get('email', None)
-    p = request.POST.get('password', None)
-    r = request.POST.get('repwd', None)
-    return (u,e,p,r)
+    return (u,e)
 
 ####### views ####### 
 def index(request):
@@ -34,9 +32,9 @@ def form(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             # add new user
-            (u,e,p,r) = getUserInput(request)
+            (u,e) = getUserInput(request)
             try:
-                feedback = add_user(u, e, p)
+                feedback = add_user(u, e)
             except:
                 e = sys.exc_info()[0]
                 print(e)

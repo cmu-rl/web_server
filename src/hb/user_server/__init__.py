@@ -28,26 +28,29 @@ def generateUserID(minecraftUUID):
         raise Exception("minecraft username does not exist")
     return uid
 
+def valid_username(username):
+    username = username.replace("_", "")
+    return username.isalnum()
+
 def give_error_feedback():
    feedback = {}
    feedback['error'] = True
    feedback['message'] = "not valid minecraft name!!!! T^T"
    return feedback
 
-def verified_mc_user(username, email, password):
-    return True
+def get_offline_uuid(username):
+    return hashlib.md5(username.encode()).hexdigest()
 
-def add_to_queue(username, email, password):
+def add_to_queue(username, email):
     # first vefiry username is valid
-    if not verified_mc_user(username, email, password):
+    if not valid_username(username):
         return give_error_feedback()
     # if valid, send to user server
-    uid = generateUserID(getUUID(username))
+    uid = get_offline_uuid(username)
     data = {}
     data['cmd'] = 'add_to_queue'
     data['uid'] = uid
     data['email'] = email
-    data['password'] = password
     sock.sendto(bytes(json.dumps(data), "utf-8"), (HOST, PORT))
     received = str(sock.recv(1024), "utf-8")
     feedback = json.loads(received)
@@ -56,18 +59,18 @@ def add_to_queue(username, email, password):
     return feedback 
 
 # add_user, register a new user, return a dictionary
-def add_user(username, email, password):
+def add_user(username, email):
     # first vefiry username is valid
-    if not verified_mc_user(username, email, password):
+    if not valid_username(username):
         return give_error_feedback()
+
     # if valid, send to user server
-    uid = generateUserID(getUUID(username))
+    uid = get_offline_uuid(username)
     data = {}
     data['cmd'] = 'add_user'
     data['mcusername'] = username
     data['uid'] = uid
     data['email'] = email
-    data['password'] = password
 
     sock.sendto(bytes(json.dumps(data), "utf-8"), (HOST, PORT))
     received = str(sock.recv(1024), "utf-8")
@@ -83,7 +86,7 @@ def get_status(username):
     # if not verified_mc_user(username):
         #return give_error_feedback()
     # if valid, send to user server
-    uid = generateUserID(getUUID(username))
+    uid = get_offline_uuid(username)
     data = {}
     data['cmd'] = 'get_status'
     data['uid'] = uid

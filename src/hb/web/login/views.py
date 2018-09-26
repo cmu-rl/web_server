@@ -17,8 +17,7 @@ def getErrMsg(form):
 def getUserInputFromSignin(request):
     u = request.POST.get('username', None)
     e = request.POST.get('email', None)
-    p = request.POST.get('password', None)
-    return (u,e,p)
+    return (u,e)
     
 ####### views ####### 
 def form(request):
@@ -28,8 +27,8 @@ def form(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             # get user input
-            (u,e,p) = getUserInputFromSignin(request)
-            feedback = add_to_queue(u,e,p) 
+            (u,e) = getUserInputFromSignin(request)
+            feedback = add_to_queue(u,e) 
             if feedback["error"]: 
                 isValidInput = False
                 msg = feedback['message']
