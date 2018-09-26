@@ -47,8 +47,8 @@ def form(request):
 def status(request, username): 
     try:
         status = get_status(username)
-    except TimeOut:
-        return HttpResponse("server timeout")
+    except Exception as e:
+        return HttpResponse("server timeout" + str(e))
     print(status)
     # this should be fixed later by user server update add_to_queue
     # this error should prevent user from directly entering the url
