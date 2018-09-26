@@ -52,7 +52,8 @@ def status(request, username):
     print(status)
     # this should be fixed later by user server update add_to_queue
     # this error should prevent user from directly entering the url
-    if status["error"]: return HttpResponse(status["message"])
+    if status["error"] or status["invalid"]: 
+        return HttpResponse(status["message"])
     else:
         return render(request, 'login/status.html',
             {'username':username, 
