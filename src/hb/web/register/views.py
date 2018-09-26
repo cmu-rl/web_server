@@ -38,8 +38,7 @@ def form(request):
             (u,e,p,r) = getUserInput(request)
             try:
                 feedback = add_user(u, e, p)
-            except:
-                e = sys.exc_info()[0]
+            except e:
                 print(e)
                 return HttpResponse("Error:%s" % e)
             if not feedback['error']: # sucess and redirect
