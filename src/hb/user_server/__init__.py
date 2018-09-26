@@ -7,7 +7,7 @@ import hashlib
 import urllib.request
 
 
-HOST, PORT = "user.herobraine.stream", 9999
+HOST, PORT = "user2.herobraine.stream", 9999
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.settimeout(2)
 

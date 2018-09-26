@@ -3,6 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from hb.user_server import add_user
 from .forms import SignupForm
+import sys
 
 ####### helper function ####### 
 # assume form.is_valid is false
@@ -35,8 +36,7 @@ def form(request):
             (u,e) = getUserInput(request)
             try:
                 feedback = add_user(u, e)
-            except:
-                e = sys.exc_info()[0]
+            except Exception as e:
                 print(e)
                 return HttpResponse("Error:%s" % e)
             if not feedback['error']: # sucess and redirect
