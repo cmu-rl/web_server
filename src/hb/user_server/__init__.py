@@ -2,6 +2,7 @@
 import sys
 import json
 import time
+import string
 import socket
 import hashlib
 import urllib.request
@@ -39,7 +40,7 @@ def give_error_feedback():
    return feedback
 
 def get_offline_uuid(username):
-    return hashlib.md5(username.encode()).hexdigest()
+    return hashlib.md5(username.lower().encode()).hexdigest()
 
 def add_to_queue(username, email):
     # first vefiry username is valid

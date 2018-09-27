@@ -47,14 +47,13 @@ def form(request):
 def status(request, username): 
     try:
         status = get_status(username)
-    except TimeOut:
-        return HttpResponse("server timeout")
+    except Exception as e:
+        return HttpResponse("server timeout" + str(e))
     print(status)
     # this should be fixed later by user server update add_to_queue
     # this error should prevent user from directly entering the url
-    if status["error"]: return HttpResponse("sorry you haven't sign up yet")
-    if status["banned"]: # double check: is this a boolean?
-        return render(request, 'login/banned.html')
+    if status["error"] or status["invalid"]: 
+        return HttpResponse(status["message"])
     else:
         return render(request, 'login/status.html',
             {'username':username, 
